@@ -61,7 +61,7 @@ class FacilitateTest extends \PHPUnit_Framework_TestCase
             $ctx->assertEquals('test', $str);
             $ctx->assertInstanceOf(FacilitateTest::class, $ctx);
         };
-        $this->invoke($testFunc, 1, 'variable');
+        $this->invoke($testFunc, 1, '$variable');
     }
 
     /**
@@ -81,8 +81,8 @@ class FacilitateTest extends \PHPUnit_Framework_TestCase
             $ctx->assertInstanceOf(FacilitateTest::class, $ctx);
         };
         $this
-            ->invoke($testFunc1, 1, 'variable')
-            ->invoke($testFunc2, 2, 'variable');
+            ->invoke($testFunc1, 1, '$variable')
+            ->invoke($testFunc2, 2, '$variable');
     }
 
     public function getVariable()

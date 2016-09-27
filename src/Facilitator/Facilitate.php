@@ -31,6 +31,9 @@ trait Facilitate
      */
     private $replaceRet;
 
+    /**
+     * @var PropertyAccess
+     */
     private $propAccessor;
 
     public function invoke(\Closure $func, ...$arguments)
@@ -51,8 +54,8 @@ trait Facilitate
     {
         if (!$this->replaceArgs) {
             $this->replaceArgs = function($e, $ctx, $access) {
-                if (is_string($e)) {
-                    $v = $access->getValue($ctx, $e);
+                if (is_string($e) && $e[0] === '$') {
+                    $v = $access->getValue($ctx, substr($e, 1));
                     return $v ? : $e;
                 }
                 return $e;
@@ -62,6 +65,7 @@ trait Facilitate
         return array_map($this->replaceArgs, $arguments);
     }
 
+    
     private function replaceRet($returns)
     {
         if (!$this->replaceRet) {
