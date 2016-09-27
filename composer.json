@@ -1,0 +1,24 @@
+{
+    "name": "mxe/facilitator",
+    "description": "collection of php facilitator classes",
+    "type": "library",
+    "require": {
+        "symfony/expression-language": "^3.1",
+        "lstrojny/functional-php": "1.2.4",
+        "symfony/property-access": "3.1.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus Marx",
+            "email": "markus.marx@marxenter.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Mxe\\Facilitator\\": "src/" }
+    },
+    "minimum-stability": "dev"
+}
