@@ -8,8 +8,8 @@
  */
 
 
-namespace Mxe\Facilitator\Stream\Tests;
-use Mxe\Facilitator\Stream\Stream;
+namespace Facilitator\Stream\Tests;
+use Facilitator\Stream\Stream;
 
 /**
  * @class StreamTest
@@ -27,16 +27,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $stream->map(function ($c) {return $c . '1';});
         $this->assertEquals(['11', '21', '31'], $stream->toList());
     }
-
-    public function test()
-    {
-        eval('$e = function($f) {echo $f;};');
-        $e('test');
-
-    }
-
-
-
 
 }
 
