@@ -1,5 +1,5 @@
 {
-    "name": "mxe/facilitator",
+    "name": "mxe/facilitator-php",
     "description": "collection of php facilitator classes",
     "type": "library",
     "require": {
