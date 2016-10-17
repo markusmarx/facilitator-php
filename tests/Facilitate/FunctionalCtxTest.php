@@ -13,8 +13,6 @@
 namespace Facilitator\Functional\Tests;
 
 use Facilitator\Functional\FunctionalCtx;
-use Facilitator\Functional\FunctionHelper;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
 /**
  * @class StreamTest
@@ -37,7 +35,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             $ctx->assertEquals('test', $ctx->getVariable());
             $ctx->assertInstanceOf(FunctionalCtxTest::class, $ctx);
         };
-        $this->invoke($testFunc);
+        $this->invoke($testFunc, $this);
 
     }
 
@@ -66,7 +64,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             $ctx->assertInstanceOf(FunctionalCtxTest::class, $ctx);
         };
         $this
-            ->invoke($testFunc, 1)
+            ->invoke($testFunc, 1, $this)
             ;
     }
 
@@ -81,7 +79,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             $ctx->assertEquals('test', $str);
             $ctx->assertInstanceOf(FunctionalCtxTest::class, $ctx);
         };
-        $this->invoke($testFunc, 1, '$variable');
+        $this->invoke($testFunc, 1, '$variable', $this);
     }
 
     /**
@@ -102,8 +100,8 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             $ctx->assertInstanceOf(FunctionalCtxTest::class, $ctx);
         };
         $this
-            ->invoke($testFunc1, 1, '$variable')
-            ->invoke($testFunc2, 2, '$variable');
+            ->invoke($testFunc1, 1, '$variable', $this)
+            ->invoke($testFunc2, 2, '$variable', $this);
     }
 
     public function testCreateFunction()
@@ -122,7 +120,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             ['variable1' => 'variable']
         );
         $this
-            ->invoke($testFunc1, 1);
+            ->invoke($testFunc1, 1, $this);
         $this->assertEquals('test1', $this->getVariable());
 
     }
@@ -146,7 +144,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
             null
         );
         $this
-            ->invoke($testFunc1, 1);
+            ->invoke($testFunc1, 1, $this);
         $this->assertEquals('', $this->getVariable());
 
     }
@@ -170,7 +168,7 @@ class FunctionalCtxTest extends \PHPUnit_Framework_TestCase
 
 }
 
-function testFunction($obj)
+function testFunction(FunctionalCtxTest $obj)
 {
     $obj->setVariable('run');
 }
